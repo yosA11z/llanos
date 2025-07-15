@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Fondo muy claro */
+            color: #334155; /* Texto principal gris oscuro */
+        }
+        .container-custom {
+            max-width: 1280px; /* Un poco más ancho para un look moderno */
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        /* Estilos para iconos SVG */
+        .icon-feature {
+            width: 48px;
+            height: 48px;
+            color: #2563eb; /* Azul primario */
+        }
+
+        #buttonxd{
+            padding-top: 5%;
+            padding: 5%;
+            background-color: gray;
+            border-radius: 20px;
+            padding: 10px 550px;
+        }
+
+        #buttonxd:hover{
+            background-color: #6f747e;
+            
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container-custom">
+        <!-- Sección de Encabezado -->
+        <header class="text-center py-16 md:py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-3xl shadow-xl mb-16">
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-4 leading-tight">
+                Tu Espacio para Ideas Brillantes
+            </h1>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-light opacity-90">
+                Captura, Organiza, Colabora.
+            </h2>
+        </header>
+
+        <!-- Sección de Héroe con Imagen Realista -->
+        <section class="mb-20 flex flex-col md:flex-row items-center gap-12 px-4">
+            <div class="md:w-1/2 text-center md:text-left">
+                <p class="text-xl sm:text-2xl leading-relaxed text-gray-700 mb-8">
+                    En un mundo que nunca se detiene, necesitas una herramienta que te ayude a mantener el ritmo.
+                    Nuestra plataforma de notas digitales está diseñada para que <strong class="text-blue-700">cada idea cuente</strong>,
+                    <strong class="text-blue-700">cada tarea se complete</strong> y tu <strong class="text-blue-700">productividad alcance nuevas alturas</strong>.
+                </p>
+                <!-- Botones de Llamada a la Acción -->
+                <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-6">
+                    </button>
+                    <button id="acceder1" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 px-8 rounded-full shadow-md
+                                   transform hover:scale-105 transition-all duration-300 text-xl focus:outline-none focus:ring-4 focus:ring-gray-400">
+                        Acceder
+                    </button>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://images.unsplash.com/photo-1587614304968-cb59d8564e90?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                     alt="Persona trabajando en una laptop con notas digitales"
+                     class="w-full max-w-2xl rounded-3xl shadow-2xl border-4 border-blue-100 object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/800x450/e0f2fe/0c4a6e?text=Organiza+tus+ideas';">
+            </div>
+        </section>
+
+        <!-- Sección de Características Destacadas -->
+        <section class="mb-20 bg-white p-12 rounded-3xl shadow-2xl">
+            <h3 class="text-4xl sm:text-5xl font-bold text-center text-blue-800 mb-12">
+                Potencia tu Productividad
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 text-center">
+                <!-- Característica 1: Sincronización -->
+                <div class="p-8 rounded-2xl shadow-lg border border-gray-100 transform hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-blue-50 to-white">
+                    <svg class="icon-feature mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    <h4 class="text-2xl font-semibold mb-3 text-gray-800">Acceso Universal</h4>
+                    <p class="text-gray-600 leading-relaxed">Tus notas, siempre contigo. Accede y edita desde cualquier dispositivo, en cualquier momento y lugar.</p>
+                </div>
+                <!-- Característica 2: Organización -->
+                <div class="p-8 rounded-2xl shadow-lg border border-gray-100 transform hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-blue-50 to-white">
+                    <svg class="icon-feature mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <h4 class="text-2xl font-semibold mb-3 text-gray-800">Organización Sin Esfuerzo</h4>
+                    <p class="text-gray-600 leading-relaxed">Hacemos todo por ti para que no tengas que preocuparte.</p>
+                </div>
+                <!-- Característica 3: Colaboración -->
+                <div class="p-8 rounded-2xl shadow-lg border border-gray-100 transform hover:scale-105 transition-transform duration-300 bg-gradient-to-br from-blue-50 to-white">
+                    <svg class="icon-feature mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2v11a2 2 0 002 2zM9 20h2a2 2 0 002-2V7a2 2 0 00-2-2H9a2 2 0 00-2 2v11a2 2 0 002 2zM5 20h2a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v11a2 2 0 002 2z"></path>
+                    </svg>
+                    <h4 class="text-2xl font-semibold mb-3 text-gray-800">Colaboración Fluida</h4>
+                    <p class="text-gray-600 leading-relaxed">Comparte notas, asigna tareas y trabaja en equipo en tiempo real, simplificando tus proyectos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Video Demo -->
+        <section class="text-center mb-20 bg-gradient-to-br from-gray-50 to-white p-12 rounded-3xl shadow-2xl">
+            <h3 class="text-4xl sm:text-5xl font-bold text-gray-800 mb-8">
+                Descubre Nuestro Poder en Acción
+            </h3>
+            <p class="text-lg text-gray-600 mb-10 max-w-3xl mx-auto">
+                Mira cómo nuestra plataforma puede transformar tu gestión de notas y tareas en este breve video demostrativo.
+            </p>
+            <div class="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl border-4 border-gray-200">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                     alt="Miniatura de video demo de la aplicación"
+                     class="w-full h-auto object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/16x9_ratio/d1e7dd/0a3622?text=Video+Demo';">
+                <div class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50">
+                    <button class="bg-white text-blue-600 rounded-full p-6 shadow-xl transform hover:scale-110 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50">
+                        <!-- Icono de Play SVG más grande -->
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Testimonios -->
+        <section class="mb-20 bg-blue-50 p-12 rounded-3xl shadow-2xl">
+            <h3 class="text-4xl sm:text-5xl font-bold text-center text-blue-800 mb-12">
+                Lleva facilmente un registro de tus notas
+            </h3>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <button id="buttonxd">ACCEDER</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Pie de Página (Footer) -->
+        <footer class="text-center py-10 border-t border-gray-200 mt-12 text-gray-600 bg-white rounded-t-3xl shadow-inner">
+            <div class="flex justify-center space-x-8 mb-8">
+                <!-- Iconos de redes sociales (SVG) -->
+                
+            </div>
+            <p class="text-sm">&copy; 2025 llanos gay. Todos los derechos reservados.</p>
+            <div class="text-sm mt-3">
+                <a href="#" class="hover:underline px-2">Política de Privacidad</a> |
+                <a href="#" class="hover:underline px-2">Términos de Servicio</a> |
+                <a href="#" class="hover:underline px-2">Contacto</a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        const acceder = document.getElementById("acceder1");
+const accederxd = document.getElementById("buttonxd");
+
+acceder.addEventListener("click", () => {
+    window.location.href = "login.html";
+});
+
+accederxd.addEventListener("click", () => {
+    window.location.href = "login.html";
+});
+
+    </script>
+</body>
+</html>

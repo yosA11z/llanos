@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard de Notas</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #111;
+    }
+
+    header {
+      background-color: #caf8c9;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: black;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .dashboard {
+        display: grid;
+         grid-template-columns: repeat(2, 1fr);
+         gap: 2rem;
+         padding: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .dashboard {
+             grid-template-columns: 1fr;
+        }
+    }
+
+
+    .chart-box {
+      background-color: #f7f7f7;
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      min-height: 200px;
+    }
+
+    canvas {
+      width: 100% !important;
+      max-width: 400px;
+      height: auto !important;
+      display: block;
+      margin: 0 auto;
+    }
+
+
+
+    #volver {
+      display: block;
+      margin:2rem auto;
+      padding: 12px 24px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #volver:hover {
+      background: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+  <header>📊 Dashboard de Notas</header>
+
+  <div class="dashboard">
+    <div class="chart-box"><canvas id="graficoBarras"></canvas></div>
+    <div class="chart-box"><canvas id="graficoTorta"></canvas></div>
+    <div class="chart-box"><canvas id="graficoDobleBarra"></canvas></div>
+    <div class="chart-box"><canvas id="graficoLinea"></canvas></div>
+  </div>
+
+  <button id="volver" onclick="window.location.href='plataforma.html'">Volver</button>
+
+  <script>
+    const supabaseUrl = "https://aamvnpvfzmnrrfurovuv.supabase.co";
+    const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhbXZucHZmem1ucnJmdXJvdnV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgwNjI2NDUsImV4cCI6MjA2MzYzODY0NX0._OigReH-zPR9AfGE5L9Rw9H71AnxQzH7T5k93mjPj5E";
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+    const conversionNotas = {
+      "DBJ": 1,
+      "DB": 3,
+      "DA": 4,
+      "DS": 5
+    };
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser || !currentUser.id) {
+        alert("Debes iniciar sesión.");
+        window.location.href = "login-estudiantes.html";
+        return;
+      }
+
+      try {
+        const { data: notasData, error } = await supabase
+          .from("notas")
+          .select("nota, materias(nombre)")
+          .eq("estudiante_id", currentUser.id);
+
+        if (error) throw error;
+
+        const labels = [];
+        const valores = [];
+        const conteoNotas = { DBJ: 0, DB: 0, DA: 0, DS: 0 };
+
+        notasData.forEach(n => {
+          const nombreMateria = n.materias?.nombre || "Materia";
+          const nota = n.nota;
+          const valor = conversionNotas[nota] || 0;
+          labels.push(nombreMateria);
+          valores.push(valor);
+          conteoNotas[nota] = (conteoNotas[nota] || 0) + 1;
+        });
+
+        // Gráfico de barras
+        new Chart(document.getElementById('graficoBarras'), {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Desempeño por Materia',
+              data: valores,
+              backgroundColor: valores.map(v => v <= 1 ? '#ef5350' : v <= 3 ? '#ffb300' : v <= 4 ? '#81c784' : '#2e7d32'),
+              borderRadius: 10
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 1,
+                  callback: value => ({1:'DBJ',3:'DB',4:'DA',5:'DS'}[value] || '')
+                }
+              }
+            },
+            plugins: { legend: { display: false } }
+          }
+        });
+
+        // Gráfico de torta
+        new Chart(document.getElementById('graficoTorta'), {
+          type: 'pie',
+          data: {
+            labels: Object.keys(conteoNotas),
+            datasets: [{
+              data: Object.values(conteoNotas),
+              backgroundColor: ['#ef5350', '#ffb300', '#81c784', '#2e7d32']
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                labels: { color: '#000' }
+              }
+            }
+          }
+        });
+
+        // Gráfico de doble barra
+        new Chart(document.getElementById('graficoDobleBarra'), {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [
+              {
+                label: 'Obtenido',
+                data: valores,
+                backgroundColor: '#64b5f6'
+              },
+              {
+                label: 'Objetivo (DS)',
+                data: labels.map(() => 5),
+                backgroundColor: '#2e7d32'
+              }
+            ]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 1,
+                  callback: value => ({1:'DBJ',3:'DB',4:'DA',5:'DS'}[value] || '')
+                }
+              }
+            }
+          }
+        });
+
+        // Gráfico de líneas
+        new Chart(document.getElementById('graficoLinea'), {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Progreso',
+              data: valores,
+              fill: false,
+              borderColor: '#ff7043',
+              tension: 0.3
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 1,
+                  callback: value => ({1:'DBJ',3:'DB',4:'DA',5:'DS'}[value] || '')
+                }
+              }
+            }
+          }
+        });
+
+      } catch (err) {
+        console.error("Error al cargar datos:", err);
+        alert("Hubo un problema al cargar el dashboard.");
+      }
+    });
+  </script>
+</body>
+</html>
